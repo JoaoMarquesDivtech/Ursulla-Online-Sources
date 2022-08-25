@@ -705,6 +705,7 @@ void Items::parseItemNode(const pugi::xml_node& itemNode, uint16_t id)
 			abilities.reflectPercent[combatTypeToIndex(COMBAT_DEATHDAMAGE)] += value;
 			abilities.reflectPercent[combatTypeToIndex(COMBAT_SONGDAMAGE)] += value;
 			abilities.reflectPercent[combatTypeToIndex(COMBAT_AIRDAMAGE)] += value;
+			abilities.reflectPercent[combatTypeToIndex(COMBAT_BLOODDAMAGE)] += value;
 		} else if (tmpStrValue == "absorbpercentelements") {
 			int16_t value = pugi::cast<int16_t>(valueAttribute.value());
 			Abilities& abilities = it.getAbilities();
@@ -721,6 +722,9 @@ void Items::parseItemNode(const pugi::xml_node& itemNode, uint16_t id)
 			abilities.absorbPercent[combatTypeToIndex(COMBAT_ICEDAMAGE)] += value;
 			abilities.absorbPercent[combatTypeToIndex(COMBAT_HOLYDAMAGE)] += value;
 			abilities.absorbPercent[combatTypeToIndex(COMBAT_DEATHDAMAGE)] += value;
+			abilities.reflectPercent[combatTypeToIndex(COMBAT_SONGDAMAGE)] += value;
+			abilities.reflectPercent[combatTypeToIndex(COMBAT_AIRDAMAGE)] += value;
+			abilities.reflectPercent[combatTypeToIndex(COMBAT_BLOODDAMAGE)] += value;
 		} else if (tmpStrValue == "absorbpercentenergy") {
 			it.getAbilities().absorbPercent[combatTypeToIndex(COMBAT_ENERGYDAMAGE)] += pugi::cast<int16_t>(valueAttribute.value());
 		} else if (tmpStrValue == "absorbpercentfire") {
@@ -751,6 +755,10 @@ void Items::parseItemNode(const pugi::xml_node& itemNode, uint16_t id)
 			it.getAbilities().reflectPercent[combatTypeToIndex(COMBAT_FIREDAMAGE)] += pugi::cast<int16_t>(valueAttribute.value());
 		} else if (tmpStrValue == "reflectpercentpoison" || tmpStrValue == "reflectpercentearth") {
 			it.getAbilities().reflectPercent[combatTypeToIndex(COMBAT_EARTHDAMAGE)] += pugi::cast<int16_t>(valueAttribute.value());
+		} else if (tmpStrValue == "reflectpercentsong") {
+			it.getAbilities().reflectPercent[combatTypeToIndex(COMBAT_SONGDAMAGE)] += pugi::cast<int16_t>(valueAttribute.value());
+		} else if (tmpStrValue == "reflectpercentblood") {
+			it.getAbilities().reflectPercent[combatTypeToIndex(COMBAT_BLOODDAMAGE)] += pugi::cast<int16_t>(valueAttribute.value());
 		} else if (tmpStrValue == "reflectpercentice") {
 			it.getAbilities().reflectPercent[combatTypeToIndex(COMBAT_ICEDAMAGE)] += pugi::cast<int16_t>(valueAttribute.value());
 		} else if (tmpStrValue == "reflectpercentholy") {
