@@ -66,6 +66,13 @@ void ProtocolGameBase::AddOutfit(NetworkMessage& msg, const Outfit_t& outfit)
 		msg.addByte(outfit.lookBody);
 		msg.addByte(outfit.lookLegs);
 		msg.addByte(outfit.lookFeet);
+		msg.addByte(outfit.lookHelmet);
+		std::cout <<"\n - GameBase  - \n\n"<< "Resultado:" << player->defaultOutfit.lookHelmet << "Resultado:" << player->defaultOutfit.lookArmor << "Resultado:" << player->defaultOutfit.lookPants << "Resultado:" << player->defaultOutfit.lookBoots;
+		std::cout << "___________________________________________________________________________________________";
+		std::cout <<"\n - GameBase2 - \n\n"<< "Resultado:" << outfit.lookHelmet << "Resultado:" << outfit.lookArmor << "Resultado:" << outfit.lookPants << "Resultado:" << outfit.lookBoots;
+		msg.addByte(outfit.lookArmor);
+		msg.addByte(outfit.lookPants);
+		msg.addByte(outfit.lookBoots);
 		msg.addByte(outfit.lookAddons);
 	} else {
 		msg.addItemId(outfit.lookTypeEx);

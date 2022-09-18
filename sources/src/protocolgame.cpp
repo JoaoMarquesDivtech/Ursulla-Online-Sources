@@ -659,8 +659,12 @@ void ProtocolGame::parseSetOutfit(NetworkMessage& msg)
 	newOutfit.lookBody = msg.getByte();
 	newOutfit.lookLegs = msg.getByte();
 	newOutfit.lookFeet = msg.getByte();
+	newOutfit.lookHelmet = msg.getByte();
+	newOutfit.lookArmor = msg.getByte();
+	newOutfit.lookPants = msg.getByte();
+	newOutfit.lookBoots = msg.getByte();
 	newOutfit.lookAddons = msg.getByte();
-	newOutfit.lookMount = msg.get<uint16_t>();
+	newOutfit.lookMount = msg.get<uint16_t>();	
 	addGameTask(&Game::playerChangeOutfit, player->getID(), newOutfit);
 }
 
@@ -1057,6 +1061,7 @@ void ProtocolGame::sendCreatureOutfit(const Creature* creature, const Outfit_t& 
 	NetworkMessage msg;
 	msg.addByte(0x8E);
 	msg.add<uint32_t>(creature->getID());
+
 	AddOutfit(msg, outfit);
 	writeToOutputBuffer(msg);
 }

@@ -396,3 +396,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/boost_1_62_0
+/tfs-sdk-3.2

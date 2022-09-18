@@ -109,6 +109,7 @@ bool Vocations::loadFromXml()
 		if ((attr = vocationNode.attribute("fromvoc"))) {
 			voc.fromVocation = pugi::cast<uint32_t>(attr.value());
 		}
+
 		if ((attr = vocationNode.attribute("dualwield"))) {
 			voc.dualWield = attr.as_bool();
 		}
@@ -182,7 +183,7 @@ uint16_t Vocations::getPromotedVocation(uint16_t vocationId) const
 	return VOCATION_NONE;
 }
 
-uint32_t Vocation::skillBase[SKILL_LAST + 1] = {50, 50, 50, 50, 30, 100, 20};
+uint32_t Vocation::skillBase[SKILL_LAST + 1] = {50, 50, 50, 50, 30, 100, 20, 50, 50};
 
 uint64_t Vocation::getReqSkillTries(uint8_t skill, uint16_t level)
 {

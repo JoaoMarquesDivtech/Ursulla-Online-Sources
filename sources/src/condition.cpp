@@ -523,6 +523,8 @@ bool ConditionAttributes::setParam(ConditionParam_t param, int32_t value)
 			skills[SKILL_CLUB] = value;
 			skills[SKILL_AXE] = value;
 			skills[SKILL_SWORD] = value;
+			skillsPercent[SKILL_SCYTHE] = value;
+			skillsPercent[SKILL_DAGGER] = value;
 			return true;
 		}
 
@@ -530,6 +532,8 @@ bool ConditionAttributes::setParam(ConditionParam_t param, int32_t value)
 			skillsPercent[SKILL_CLUB] = value;
 			skillsPercent[SKILL_AXE] = value;
 			skillsPercent[SKILL_SWORD] = value;
+			skillsPercent[SKILL_SCYTHE] = value;
+			skillsPercent[SKILL_DAGGER] = value;
 			return true;
 		}
 
@@ -569,6 +573,26 @@ bool ConditionAttributes::setParam(ConditionParam_t param, int32_t value)
 		}
 
 		case CONDITION_PARAM_SKILL_AXEPERCENT: {
+			skillsPercent[SKILL_AXE] = value;
+			return true;
+		}
+
+		case CONDITION_PARAM_SKILL_SCYTHE: {
+			skills[SKILL_AXE] = value;
+			return true;
+		}
+
+		case CONDITION_PARAM_SKILL_SCYTHEPERCENT: {
+			skillsPercent[SKILL_AXE] = value;
+			return true;
+		}
+
+		case CONDITION_PARAM_SKILL_DAGGER: {
+			skills[SKILL_AXE] = value;
+			return true;
+		}
+
+		case CONDITION_PARAM_SKILL_DAGGERPERCENT: {
 			skillsPercent[SKILL_AXE] = value;
 			return true;
 		}

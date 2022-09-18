@@ -113,8 +113,8 @@ struct OpenContainer {
 };
 
 struct OutfitEntry {
-	constexpr OutfitEntry(uint16_t lookType, uint8_t addons) : lookType(lookType), addons(addons) {}
-
+	constexpr OutfitEntry(uint16_t lookType,
+						  uint8_t addons) : lookType(lookType), addons(addons) {}
 	uint16_t lookType;
 	uint8_t addons;
 };

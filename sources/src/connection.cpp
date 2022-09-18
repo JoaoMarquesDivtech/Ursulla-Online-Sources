@@ -292,7 +292,7 @@ void Connection::dispatchBroadcastMessage(const OutputMessage_ptr& msg)
 {
 	auto msgCopy = OutputMessagePool::getOutputMessage();
 	msgCopy->append(msg);
-	GET_IO_SERVICE(socket).dispatch(std::bind(&Connection::broadcastMessage, shared_from_this(), msgCopy));
+	socket.get_io_service().dispatch(std::bind(&Connection::broadcastMessage, shared_from_this(), msgCopy));
 }
 
 void Connection::broadcastMessage(OutputMessage_ptr msg)

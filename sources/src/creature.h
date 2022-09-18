@@ -133,6 +133,8 @@ class Creature : virtual public Thing
 
 		virtual const std::string& getName() const = 0;
 		virtual const std::string& getNameDescription() const = 0;
+		Outfit_t currentOutfit;
+		Outfit_t defaultOutfit;
 
 		virtual CreatureType_t getType() const = 0;
 
@@ -521,8 +523,7 @@ class Creature : virtual public Thing
 		int32_t health = 1000;
 		int32_t healthMax = 1000;
 
-		Outfit_t currentOutfit;
-		Outfit_t defaultOutfit;
+
 
 		Position lastPosition;
 		LightInfo internalLight;

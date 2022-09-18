@@ -642,6 +642,26 @@ uint32_t MoveEvent::EquipItem(MoveEvent* moveEvent, Player* player, Item* item, 
 		return 1;
 	}
 
+
+	if(player){
+
+		if (it.abilities->looks[HELMET]) {
+			player->defaultOutfit.lookHelmet = it.abilities->looks[HELMET];
+		}
+		else if (it.abilities->looks[ARMOR]) {
+			player->defaultOutfit.lookArmor = it.abilities->looks[ARMOR];
+		}
+		else if (it.abilities->looks[PANTS]) {
+			player->defaultOutfit.lookBoots = it.abilities->looks[PANTS];
+		}
+		else if (it.abilities->looks[BOOTS]) {
+			player->defaultOutfit.lookPants = it.abilities->looks[BOOTS];			
+		}
+		player->currentOutfit = player->defaultOutfit;
+
+		player->sendCreatureChangeOutfit(player->getCreature(), player->defaultOutfit);
+	}
+
 	if (it.abilities->invisible) {
 		Condition* condition = Condition::createCondition(static_cast<ConditionId_t>(slot), CONDITION_INVISIBLE, -1, 0);
 		player->addCondition(condition);
@@ -774,6 +794,31 @@ uint32_t MoveEvent::DeEquipItem(MoveEvent*, Player* player, Item* item, slots_t 
 
 	//stat modifiers
 	bool needUpdateStats = false;
+
+
+
+
+	if (player) {
+
+		if (it.abilities->looks[HELMET]) {
+			player->defaultOutfit.lookHelmet = 0;
+		}
+		else if (it.abilities->looks[ARMOR]) {
+			player->defaultOutfit.lookArmor = 0;
+		}
+		else if (it.abilities->looks[PANTS]) {
+			player->defaultOutfit.lookLegs = 0;
+		}
+		else if (it.abilities->looks[BOOTS]) {
+			player->defaultOutfit.lookBoots = 0;
+		}
+		player->currentOutfit = player->defaultOutfit;
+
+		player->sendCreatureChangeOutfit(player->getCreature(), player->defaultOutfit);
+
+
+	}
+
 
 	for (int32_t s = STAT_FIRST; s <= STAT_LAST; ++s) {
 		if (it.abilities->stats[s]) {

@@ -89,6 +89,10 @@ struct Abilities {
 	uint16_t elementDamage = 0;
 	CombatType_t elementType = COMBAT_NONE;
 
+	//LookVisions
+	int32_t looks[LOOK_LAST + 1] = { 0 };
+
+
 	bool manaShield = false;
 	bool invisible = false;
 	bool regeneration = false;

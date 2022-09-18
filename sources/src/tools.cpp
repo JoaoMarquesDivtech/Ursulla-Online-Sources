@@ -774,6 +774,12 @@ std::string getSkillName(uint8_t skillid)
 		case SKILL_AXE:
 			return "axe fighting";
 
+		case SKILL_SCYTHE:
+			return "scythe fighting";
+
+		case SKILL_DAGGER:
+			return "dagger fighting";
+
 		case SKILL_DISTANCE:
 			return "distance fighting";
 
@@ -882,6 +888,8 @@ std::string getWeaponName(WeaponType_t weaponType)
 		case WEAPON_SWORD: return "sword";
 		case WEAPON_CLUB: return "club";
 		case WEAPON_AXE: return "axe";
+		case WEAPON_SCYTHE: return "scythe";
+		case WEAPON_DAGGER: return "dagger";
 		case WEAPON_DISTANCE: return "distance";
 		case WEAPON_WAND: return "wand";
 		case WEAPON_AMMO: return "ammunition";

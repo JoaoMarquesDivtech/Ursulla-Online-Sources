@@ -222,7 +222,7 @@ bool IOLoginData::preloadPlayer(Player* player, const std::string& name)
 bool IOLoginData::loadPlayerById(Player* player, uint32_t id)
 {
 	std::ostringstream query;
-	query << "SELECT `id`, `name`, `account_id`, `group_id`, `sex`, `vocation`, `experience`, `level`, `maglevel`, `health`, `healthmax`, `blessings`, `mana`, `manamax`, `manaspent`, `soul`, `lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, `lookaddons`, `posx`, `posy`, `posz`, `cap`, `lastlogin`, `lastlogout`, `lastip`, `conditions`, `skulltime`, `skull`, `town_id`, `balance`, `offlinetraining_time`, `offlinetraining_skill`, `stamina`, `skill_fist`, `skill_fist_tries`, `skill_club`, `skill_club_tries`, `skill_sword`, `skill_sword_tries`, `skill_axe`, `skill_axe_tries`, `skill_dist`, `skill_dist_tries`, `skill_shielding`, `skill_shielding_tries`, `skill_fishing`, `skill_fishing_tries`, `skill_critical_hit_chance`, `skill_critical_hit_chance_tries`, `skill_critical_hit_damage`, `skill_critical_hit_damage_tries`, `skill_life_leech_chance`, `skill_life_leech_chance_tries`, `skill_life_leech_amount`, `skill_life_leech_amount_tries`, `skill_mana_leech_chance`, `skill_mana_leech_chance_tries`, `skill_mana_leech_amount`,  `skill_mana_leech_amount_tries` FROM `players` WHERE `id` = " << id;
+	query << "SELECT `id`, `name`, `account_id`, `group_id`, `sex`, `vocation`, `experience`, `level`, `maglevel`, `health`, `healthmax`, `blessings`, `mana`, `manamax`, `manaspent`, `soul`, `lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, `lookaddons`, `posx`, `posy`, `posz`, `cap`, `lastlogin`, `lastlogout`, `lastip`, `conditions`, `skulltime`, `skull`, `town_id`, `balance`, `offlinetraining_time`, `offlinetraining_skill`, `stamina`, `skill_fist`, `skill_fist_tries`, `skill_club`, `skill_club_tries`, `skill_sword`, `skill_sword_tries`, `skill_axe`, `skill_axe_tries`, `skill_scythe`, `skill_scythe_tries`, `skill_dagger`, `skill_dagger_tries`, `skill_dist`, `skill_dist_tries`, `skill_shielding`, `skill_shielding_tries`, `skill_fishing`, `skill_fishing_tries`, `skill_scythe`, `skill_scythe_tries`, `skill_dagger`, `skill_dagger_tries`, `lookhelmet`, `lookarmor`, `lookpants`, `lookboots` FROM `players` WHERE `id` = " << id;
 	return loadPlayer(player, Database::getInstance()->storeQuery(query.str()));
 }
 
@@ -230,7 +230,7 @@ bool IOLoginData::loadPlayerByName(Player* player, const std::string& name)
 {
 	Database* db = Database::getInstance();
 	std::ostringstream query;
-	query << "SELECT `id`, `name`, `account_id`, `group_id`, `sex`, `vocation`, `experience`, `level`, `maglevel`, `health`, `healthmax`, `blessings`, `mana`, `manamax`, `manaspent`, `soul`, `lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, `lookaddons`, `posx`, `posy`, `posz`, `cap`, `lastlogin`, `lastlogout`, `lastip`, `conditions`, `skulltime`, `skull`, `town_id`, `balance`, `offlinetraining_time`, `offlinetraining_skill`, `stamina`, `skill_fist`, `skill_fist_tries`, `skill_club`, `skill_club_tries`, `skill_sword`, `skill_sword_tries`, `skill_axe`, `skill_axe_tries`, `skill_dist`, `skill_dist_tries`, `skill_shielding`, `skill_shielding_tries`, `skill_fishing`, `skill_fishing_tries`, `skill_critical_hit_chance`, `skill_critical_hit_chance_tries`, `skill_critical_hit_damage`, `skill_critical_hit_damage_tries`, `skill_life_leech_chance`, `skill_life_leech_chance_tries`, `skill_life_leech_amount`, `skill_life_leech_amount_tries`, `skill_mana_leech_chance`, `skill_mana_leech_chance_tries`, `skill_mana_leech_amount`, `skill_mana_leech_amount_tries` FROM `players` WHERE `name` = " << db->escapeString(name);
+	query << "SELECT `id`, `name`, `account_id`, `group_id`, `sex`, `vocation`, `experience`, `level`, `maglevel`, `health`, `healthmax`, `blessings`, `mana`, `manamax`, `manaspent`, `soul`, `lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, `lookaddons`, `posx`, `posy`, `posz`, `cap`, `lastlogin`, `lastlogout`, `lastip`, `conditions`, `skulltime`, `skull`, `town_id`, `balance`, `offlinetraining_time`, `offlinetraining_skill`, `stamina`, `skill_fist`, `skill_fist_tries`, `skill_club`, `skill_club_tries`, `skill_sword`, `skill_sword_tries`, `skill_axe`, `skill_axe_tries`, `skill_scythe`, `skill_scythe_tries`, `skill_dagger`, `skill_dagger_tries`, `skill_dist`, `skill_dist_tries`, `skill_shielding`, `skill_shielding_tries`, `skill_fishing`, `skill_fishing_tries`, `skill_scythe`, `skill_scythe_tries`, `skill_dagger`, `skill_dagger_tries`, `lookhelmet`, `lookarmor`, `lookpants`, `lookboots`   FROM `players` WHERE `name` = " << db->escapeString(name);
 	return loadPlayer(player, db->storeQuery(query.str()));
 }
 
@@ -330,7 +330,18 @@ bool IOLoginData::loadPlayer(Player* player, DBResult_ptr result)
 	player->defaultOutfit.lookBody = result->getNumber<uint16_t>("lookbody");
 	player->defaultOutfit.lookLegs = result->getNumber<uint16_t>("looklegs");
 	player->defaultOutfit.lookFeet = result->getNumber<uint16_t>("lookfeet");
+
+	
 	player->defaultOutfit.lookAddons = result->getNumber<uint16_t>("lookaddons");
+
+	player->defaultOutfit.lookHelmet = result->getNumber<uint16_t>("lookhelmet");
+	player->defaultOutfit.lookArmor = result->getNumber<uint16_t>("lookarmor");
+	player->defaultOutfit.lookPants = result->getNumber<uint16_t>("lookpants");
+	player->defaultOutfit.lookBoots = result->getNumber<uint16_t>("lookboots");
+
+
+
+
 	player->currentOutfit = player->defaultOutfit;
 
 	if (g_game.getWorldType() != WORLD_TYPE_PVP_ENFORCED) {
@@ -373,8 +384,8 @@ bool IOLoginData::loadPlayer(Player* player, DBResult_ptr result)
 
 	player->staminaMinutes = result->getNumber<uint16_t>("stamina");
 
-	static const std::string skillNames[] = {"skill_fist", "skill_club", "skill_sword", "skill_axe", "skill_dist", "skill_shielding", "skill_fishing", "skill_critical_hit_chance", "skill_critical_hit_damage", "skill_life_leech_chance", "skill_life_leech_amount", "skill_mana_leech_chance", "skill_mana_leech_amount"};
-	static const std::string skillNameTries[] = {"skill_fist_tries", "skill_club_tries", "skill_sword_tries", "skill_axe_tries", "skill_dist_tries", "skill_shielding_tries", "skill_fishing_tries", "skill_critical_hit_chance_tries", "skill_critical_hit_damage_tries", "skill_life_leech_chance_tries", "skill_life_leech_amount_tries", "skill_mana_leech_chance_tries", "skill_mana_leech_amount_tries"};
+	static const std::string skillNames[] = {"skill_fist", "skill_club", "skill_sword", "skill_axe", "skill_dist", "skill_shielding", "skill_fishing", "skill_scythe", "skill_dagger" };
+	static const std::string skillNameTries[] = {"skill_fist_tries", "skill_club_tries", "skill_sword_tries", "skill_axe_tries", "skill_dist_tries", "skill_shielding_tries", "skill_fishing_tries", "skill_scythe_tries", "skill_dagger_tries"};
 	static constexpr size_t size = sizeof(skillNames) / sizeof(std::string);
 	for (uint8_t i = 0; i < size; ++i) {
 		uint16_t skillLevel = result->getNumber<uint16_t>(skillNames[i]);
@@ -388,6 +399,8 @@ bool IOLoginData::loadPlayer(Player* player, DBResult_ptr result)
 		player->skills[i].tries = skillTries;
 		player->skills[i].percent = Player::getPercentLevel(skillTries, nextSkillTries);
 	}
+
+
 
 	std::ostringstream query;
 	query << "SELECT `guild_id`, `rank_id`, `nick` FROM `guild_membership` WHERE `player_id` = " << player->getGUID();
@@ -727,6 +740,12 @@ bool IOLoginData::savePlayer(Player* player)
 	query << "`looklegs` = " << static_cast<uint32_t>(player->defaultOutfit.lookLegs) << ',';
 	query << "`looktype` = " << player->defaultOutfit.lookType << ',';
 	query << "`lookaddons` = " << static_cast<uint32_t>(player->defaultOutfit.lookAddons) << ',';
+
+	query << "`lookhelmet` = " << static_cast<uint32_t>(player->defaultOutfit.lookHelmet) << ',';
+	query << "`lookarmor` = " << static_cast<uint32_t>(player->defaultOutfit.lookArmor) << ',';
+	query << "`lookpants` = " << static_cast<uint32_t>(player->defaultOutfit.lookPants) << ',';
+	query << "`lookboots` = " << static_cast<uint32_t>(player->defaultOutfit.lookBoots) << ',';
+
 	query << "`maglevel` = " << player->magLevel << ',';
 	query << "`mana` = " << player->mana << ',';
 	query << "`manamax` = " << player->manaMax << ',';
@@ -784,24 +803,16 @@ bool IOLoginData::savePlayer(Player* player)
 	query << "`skill_sword_tries` = " << player->skills[SKILL_SWORD].tries << ',';
 	query << "`skill_axe` = " << player->skills[SKILL_AXE].level << ',';
 	query << "`skill_axe_tries` = " << player->skills[SKILL_AXE].tries << ',';
+	query << "`skill_scythe` = " << player->skills[SKILL_SCYTHE].level << ',';
+	query << "`skill_scythe_tries` = " << player->skills[SKILL_SCYTHE].tries << ',';
+	query << "`skill_dagger` = " << player->skills[SKILL_DAGGER].level << ',';
+	query << "`skill_dagger_tries` = " << player->skills[SKILL_DAGGER].tries << ',';
 	query << "`skill_dist` = " << player->skills[SKILL_DISTANCE].level << ',';
 	query << "`skill_dist_tries` = " << player->skills[SKILL_DISTANCE].tries << ',';
 	query << "`skill_shielding` = " << player->skills[SKILL_SHIELD].level << ',';
 	query << "`skill_shielding_tries` = " << player->skills[SKILL_SHIELD].tries << ',';
 	query << "`skill_fishing` = " << player->skills[SKILL_FISHING].level << ',';
 	query << "`skill_fishing_tries` = " << player->skills[SKILL_FISHING].tries << ',';
-	query << "`skill_critical_hit_chance` = " << player->skills[SKILL_CRITICAL_HIT_CHANCE].level << ',';
-	query << "`skill_critical_hit_chance_tries` = " << player->skills[SKILL_CRITICAL_HIT_CHANCE].tries << ',';
-	query << "`skill_critical_hit_damage` = " << player->skills[SKILL_CRITICAL_HIT_DAMAGE].level << ',';
-	query << "`skill_critical_hit_damage_tries` = " << player->skills[SKILL_CRITICAL_HIT_DAMAGE].tries << ',';
-	query << "`skill_life_leech_chance` = " << player->skills[SKILL_LIFE_LEECH_CHANCE].level << ',';
-	query << "`skill_life_leech_chance_tries` = " << player->skills[SKILL_LIFE_LEECH_CHANCE].tries << ',';
-	query << "`skill_life_leech_amount` = " << player->skills[SKILL_LIFE_LEECH_AMOUNT].level << ',';
-	query << "`skill_life_leech_amount_tries` = " << player->skills[SKILL_LIFE_LEECH_AMOUNT].tries << ',';
-	query << "`skill_mana_leech_chance` = " << player->skills[SKILL_MANA_LEECH_CHANCE].level << ',';
-	query << "`skill_mana_leech_chance_tries` = " << player->skills[SKILL_MANA_LEECH_CHANCE].tries << ',';
-	query << "`skill_mana_leech_amount` = " << player->skills[SKILL_MANA_LEECH_AMOUNT].level << ',';
-	query << "`skill_mana_leech_amount_tries` = " << player->skills[SKILL_MANA_LEECH_AMOUNT].tries << ',';
 
 	if (!player->isOffline()) {
 		query << "`onlinetime` = `onlinetime` + " << (time(nullptr) - player->lastLoginSaved) << ',';

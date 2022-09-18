@@ -526,6 +526,10 @@ void Items::parseItemNode(const pugi::xml_node& itemNode, uint16_t id)
 				it.weaponType = WEAPON_CLUB;
 			} else if (tmpStrValue == "axe") {
 				it.weaponType = WEAPON_AXE;
+			} else if (tmpStrValue == "scythe") {
+				it.weaponType = WEAPON_SCYTHE;
+			} else if (tmpStrValue == "dagger") {
+				it.weaponType = WEAPON_DAGGER;
 			} else if (tmpStrValue == "shield") {
 				it.weaponType = WEAPON_SHIELD;
 			} else if (tmpStrValue == "distance") {
@@ -629,7 +633,15 @@ void Items::parseItemNode(const pugi::xml_node& itemNode, uint16_t id)
 			Abilities& abilities = it.getAbilities();
 			abilities.regeneration = true;
 			abilities.manaTicks = pugi::cast<uint32_t>(valueAttribute.value());
-		} else if (tmpStrValue == "manashield") {
+		} else if (tmpStrValue == "lookhelmet"){
+			it.getAbilities().looks[HELMET] = pugi::cast<int32_t>(valueAttribute.value());
+		}else if (tmpStrValue == "lookarmor"){
+			it.getAbilities().looks[ARMOR] = pugi::cast<int32_t>(valueAttribute.value());
+		}else if (tmpStrValue == "looklegs"){
+			it.getAbilities().looks[PANTS] = pugi::cast<int32_t>(valueAttribute.value());
+		}else if (tmpStrValue == "lookpants") {
+			it.getAbilities().looks[BOOTS] = pugi::cast<int32_t>(valueAttribute.value());
+		}else if (tmpStrValue == "manashield") {
 			it.getAbilities().manaShield = valueAttribute.as_bool();
 		} else if (tmpStrValue == "skillsword") {
 			it.getAbilities().skills[SKILL_SWORD] = pugi::cast<int32_t>(valueAttribute.value());
@@ -643,20 +655,14 @@ void Items::parseItemNode(const pugi::xml_node& itemNode, uint16_t id)
 			it.getAbilities().skills[SKILL_FISHING] = pugi::cast<int32_t>(valueAttribute.value());
 		} else if (tmpStrValue == "skillshield") {
 			it.getAbilities().skills[SKILL_SHIELD] = pugi::cast<int32_t>(valueAttribute.value());
-		} else if (tmpStrValue == "skillfist") {
-			it.getAbilities().skills[SKILL_FIST] = pugi::cast<int32_t>(valueAttribute.value());
-		} else if (tmpStrValue == "skillcriticalchance") {
-			it.getAbilities().skills[SKILL_CRITICAL_HIT_CHANCE] = pugi::cast<int32_t>(valueAttribute.value());
-		} else if (tmpStrValue == "skillcriticaldamage") {
-			it.getAbilities().skills[SKILL_CRITICAL_HIT_DAMAGE] = pugi::cast<int32_t>(valueAttribute.value());
+		} else if (tmpStrValue == "skillscythe") {
+			it.getAbilities().skills[SKILL_SCYTHE] = pugi::cast<int32_t>(valueAttribute.value());
+		} else if (tmpStrValue == "skilldagger") {
+			it.getAbilities().skills[SKILL_DAGGER] = pugi::cast<int32_t>(valueAttribute.value());
 		} else if (tmpStrValue == "skilllifechance") {
 			it.getAbilities().skills[SKILL_LIFE_LEECH_CHANCE] = pugi::cast<int32_t>(valueAttribute.value());
 		} else if (tmpStrValue == "skilllifeamount") {
 			it.getAbilities().skills[SKILL_LIFE_LEECH_AMOUNT] = pugi::cast<int32_t>(valueAttribute.value());
-		} else if (tmpStrValue == "skillmanachance") {
-			it.getAbilities().skills[SKILL_MANA_LEECH_CHANCE] = pugi::cast<int32_t>(valueAttribute.value());
-		} else if (tmpStrValue == "skillmanaamount") {
-			it.getAbilities().skills[SKILL_MANA_LEECH_AMOUNT] = pugi::cast<int32_t>(valueAttribute.value());
 		} else if (tmpStrValue == "maxhitpoints") {
 			it.getAbilities().stats[STAT_MAXHITPOINTS] = pugi::cast<int32_t>(valueAttribute.value());
 		} else if (tmpStrValue == "maxhitpointspercent") {
@@ -749,26 +755,6 @@ void Items::parseItemNode(const pugi::xml_node& itemNode, uint16_t id)
 			it.getAbilities().absorbPercent[combatTypeToIndex(COMBAT_PHYSICALDAMAGE)] += pugi::cast<int16_t>(valueAttribute.value());
 		} else if (tmpStrValue == "absorbpercenthealing") {
 			it.getAbilities().absorbPercent[combatTypeToIndex(COMBAT_HEALING)] += pugi::cast<int16_t>(valueAttribute.value());
-		} else if (tmpStrValue == "reflectpercentenergy") {
-			it.getAbilities().reflectPercent[combatTypeToIndex(COMBAT_ENERGYDAMAGE)] += pugi::cast<int16_t>(valueAttribute.value());
-		} else if (tmpStrValue == "reflectpercentfire") {
-			it.getAbilities().reflectPercent[combatTypeToIndex(COMBAT_FIREDAMAGE)] += pugi::cast<int16_t>(valueAttribute.value());
-		} else if (tmpStrValue == "reflectpercentpoison" || tmpStrValue == "reflectpercentearth") {
-			it.getAbilities().reflectPercent[combatTypeToIndex(COMBAT_EARTHDAMAGE)] += pugi::cast<int16_t>(valueAttribute.value());
-		} else if (tmpStrValue == "reflectpercentsong") {
-			it.getAbilities().reflectPercent[combatTypeToIndex(COMBAT_SONGDAMAGE)] += pugi::cast<int16_t>(valueAttribute.value());
-		} else if (tmpStrValue == "reflectpercentblood") {
-			it.getAbilities().reflectPercent[combatTypeToIndex(COMBAT_BLOODDAMAGE)] += pugi::cast<int16_t>(valueAttribute.value());
-		} else if (tmpStrValue == "reflectpercentice") {
-			it.getAbilities().reflectPercent[combatTypeToIndex(COMBAT_ICEDAMAGE)] += pugi::cast<int16_t>(valueAttribute.value());
-		} else if (tmpStrValue == "reflectpercentholy") {
-			it.getAbilities().reflectPercent[combatTypeToIndex(COMBAT_HOLYDAMAGE)] += pugi::cast<int16_t>(valueAttribute.value());
-		} else if (tmpStrValue == "reflectpercentdeath") {
-			it.getAbilities().reflectPercent[combatTypeToIndex(COMBAT_DEATHDAMAGE)] += pugi::cast<int16_t>(valueAttribute.value());
-		} else if (tmpStrValue == "reflectpercentlifedrain") {
-			it.getAbilities().reflectPercent[combatTypeToIndex(COMBAT_LIFEDRAIN)] += pugi::cast<int16_t>(valueAttribute.value());
-		} else if (tmpStrValue == "reflectpercentmanadrain") {
-			it.getAbilities().reflectPercent[combatTypeToIndex(COMBAT_MANADRAIN)] += pugi::cast<int16_t>(valueAttribute.value());
 		} else if (tmpStrValue == "reflectpercentphysical") {
 			it.getAbilities().reflectPercent[combatTypeToIndex(COMBAT_PHYSICALDAMAGE)] += pugi::cast<int16_t>(valueAttribute.value());
 		} else if (tmpStrValue == "suppressdrunk") {
@@ -815,6 +801,8 @@ void Items::parseItemNode(const pugi::xml_node& itemNode, uint16_t id)
 			ConditionDamage* conditionDamage = nullptr;
 
 			tmpStrValue = asLowerCaseString(valueAttribute.as_string());
+
+
 
 
 			if (tmpStrValue == "fire") {
@@ -952,6 +940,8 @@ void Items::parseItemNode(const pugi::xml_node& itemNode, uint16_t id)
 			std::cout << "[Warning - Items::parseItemNode] Unknown key value: " << keyAttribute.as_string() << std::endl;
 		}
 	}
+
+	
 
 	//check bed items
 	if ((it.transformToFree != 0 || it.transformToOnUse[PLAYERSEX_FEMALE] != 0 || it.transformToOnUse[PLAYERSEX_MALE] != 0) && it.type != ITEM_TYPE_BED) {
