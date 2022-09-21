@@ -1066,6 +1066,17 @@ void ProtocolGame::sendCreatureOutfit(const Creature* creature, const Outfit_t& 
 	writeToOutputBuffer(msg);
 }
 
+void ProtocolGame::sendCreatureNoMove(const Creature* creature, bool noMove)
+{
+
+	NetworkMessage msg;
+	msg.addByte(0xFF);
+	msg.add<uint32_t>(creature->getID());
+	msg.add<uint32_t>(noMove);
+
+	writeToOutputBuffer(msg);
+}
+
 void ProtocolGame::sendCreatureWalkthrough(const Creature* creature, bool walkthrough)
 {
 	if (!canSee(creature)) {

@@ -186,9 +186,11 @@ class Creature : virtual public Thing
 		int32_t getThrowRange() const final {
 			return 1;
 		}
+
 		bool isPushable() const override {
-			return getWalkDelay() <= 0;
+			return canMove() && getWalkDelay() <= 0;
 		}
+
 		bool isRemoved() const final {
 			return isInternalRemoved;
 		}
@@ -197,6 +199,14 @@ class Creature : virtual public Thing
 		}
 		virtual bool isInGhostMode() const {
 			return false;
+		}
+
+		bool noMove = false;
+		bool canMove() const {
+			return !noMove;
+		}
+		void setNoMove(bool noMove) {
+			this->noMove = noMove;
 		}
 
 		int32_t getWalkDelay(Direction dir) const;

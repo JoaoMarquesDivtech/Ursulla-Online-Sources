@@ -807,6 +807,13 @@ class Player final : public Creature, public Cylinder
 				client->sendCreatureOutfit(creature, outfit);
 			}
 		}
+
+		void sendCreatureNoMove(const Creature* creature, bool noMove) {
+			if (client && creature->getPlayer()) {
+				client->sendCreatureNoMove(creature, noMove);
+			}
+		}
+
 		void sendCreatureChangeVisible(const Creature* creature, bool visible) {
 			if (!client) {
 				return;

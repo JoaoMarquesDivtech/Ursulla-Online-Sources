@@ -281,6 +281,7 @@ class ProtocolGame final : public ProtocolGameBase
 		void sendChangeSpeed(const Creature* creature, uint32_t speed);
 		void sendCancelTarget();
 		void sendCreatureOutfit(const Creature* creature, const Outfit_t& outfit);
+		void sendCreatureNoMove(const Creature* creature, bool noMove);
 		void sendTextMessage(const TextMessage& message);
 		void sendReLoginWindow(uint8_t unfairFightReduction);
 

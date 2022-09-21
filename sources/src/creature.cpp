@@ -193,7 +193,7 @@ void Creature::onWalk()
 		Direction dir;
 		uint32_t flags = FLAG_IGNOREFIELDDAMAGE;
 		if (getNextStep(dir, flags)) {
-			ReturnValue ret = g_game.internalMoveCreature(this, dir, flags);
+			ReturnValue ret = canMove() ? g_game.internalMoveCreature(this, dir, flags) : RETURNVALUE_NOTPOSSIBLE;
 			if (ret != RETURNVALUE_NOERROR) {
 				if (Player* player = getPlayer()) {
 					player->sendCancelMessage(ret);

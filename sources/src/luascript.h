@@ -815,6 +815,9 @@ class LuaScriptInterface
 
 		static int luaCreatureGetPathTo(lua_State* L);
 
+		static int luaCreatureCanMove(lua_State* L);
+		static int luaCreatureSetNoMove(lua_State* L);
+
 		static int luaCreatureMoveTo(lua_State* L);
 
 		// Player

@@ -778,7 +778,7 @@ bool ConditionRegeneration::executeCondition(Creature* creature, int32_t interva
 			internalHealthTicks = 0;
 
 			int32_t realHealthGain = creature->getHealth();
-			creature->changeHealth(healthGain);
+			creature->changeHealth(healthGain + (creature->getMaxHealth() * 0.01));
 			realHealthGain = creature->getHealth() - realHealthGain;
 
 			if (isBuff && realHealthGain > 0) {
@@ -808,7 +808,7 @@ bool ConditionRegeneration::executeCondition(Creature* creature, int32_t interva
 
 		if (internalManaTicks >= manaTicks) {
 			internalManaTicks = 0;
-			creature->changeMana(manaGain);
+			creature->changeMana(manaGain + (creature->getMaxMana() * 0.01));
 		}
 	}
 
